@@ -29,28 +29,28 @@ function generateComputerChoice() {
 }
 
 function getResult() {
-    if (computerChoice === userChoice) {
-        result = 'Draw!'
+    if (!userChoice) {
+        resultDisplay.innerHTML = 'Please make a choice';
+        return;
     }
-    if (computerChoice === 'Rock' && userChoice === 'Paper') {
-        result = 'You Win!'
-    }
-    if (computerChoice === 'Rock' && userChoice === 'Scissors') {
-        result = 'You Lost!' 
-    }
-    if (computerChoice === 'Paper' && userChoice === 'Scissors') {
-        result = 'You Win!'
- }
-    if (computerChoice === 'Paper' && userChoice === 'Rock') {
-        result = 'You Lost!'
- }
-    if (computerChoice === 'Scissors' && userChoice === 'Rock') {
-        result = 'You Win!'
- }
-    if (computerChoice === 'Scissors' && userChoice === 'Paper') {
-        result = 'You Lost!'
- }
- 
- resultDisplay.innerHTML = result
 
+    if (computerChoice === userChoice) {
+        result = 'Draw!';
+    } else {
+        switch (computerChoice) {
+            case 'Rock':
+                result = userChoice === 'Paper' ? 'You Win!' : 'You Lost!';
+                break;
+            case 'Paper':
+                result = userChoice === 'Scissors' ? 'You Win!' : 'You Lost!';
+                break;
+            case 'Scissors':
+                result = userChoice === 'Rock' ? 'You Win!' : 'You Lost!';
+                break;
+            default:
+                result = 'Invalid Choice';
+                break;
+        }
+    }
+    resultDisplay.innerHTML = result;
 }
